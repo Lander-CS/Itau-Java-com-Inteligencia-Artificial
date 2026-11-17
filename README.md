@@ -72,8 +72,10 @@ src/main/java/
 │   └── Exercicio1.java    # Calculadora de Média com formatação printf
 ├── exercicio2/
 │   └── Exercicio2.java    # Sistema Bancário de Aprovação de Empréstimo (Itaú)
-└── exercicio3/
-    └── Exercicio3.java    # Verificador Par/Ímpar, Módulo e Acumulador de Pontos
+├── exercicio3/
+│   └── Exercicio3.java    # Verificador Par/Ímpar, Módulo e Acumulador de Pontos
+└── exercicio4/
+    └── Exercicio4.java    # Terminal de Autoatendimento Itaú (Switch Case & Do-While)
 ```
 
 ### [Exercício 1: Calculadora de Média Escolar](src/main/java/exercicio1/Exercicio1.java)
@@ -94,6 +96,13 @@ src/main/java/
   - Par: `pontos += 20`
   - Ímpar: `pontos -= 10`
   - Bônus para números > 100: `pontos++`
+
+### [Exercício 4: Terminal de Autoatendimento Itaú](src/main/java/exercicio4/Exercicio4.java)
+- **Foco**: Controle de fluxo com `switch case` moderno (syntax de flechas `->`) e blocos de múltiplas instruções com `{ }`.
+- **Destaque**:
+  - Implementação de laço `do-while` para manter o menu ativo até a opção de saída (`4`).
+  - Domínio de escopo de variáveis no Java (`opcao` declarada fora do loop).
+  - Operações de saldo com validação de saque e operadores de atribuição composta (`+=`, `-=`).
 
 ---
 
@@ -121,6 +130,9 @@ java src/main/java/exercicio2/Exercicio2.java
 
 # Executar Exercício 3
 java src/main/java/exercicio3/Exercicio3.java
+
+# Executar Exercício 4
+java src/main/java/exercicio4/Exercicio4.java
 ```
 
 ---
