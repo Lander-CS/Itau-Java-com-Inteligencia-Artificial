@@ -11,8 +11,9 @@ Repositório dedicado ao registro do meu aprendizado, anotações teóricas e re
 - [x] Gerenciamento de recursos e prevenção de vazamentos de memória (`Resource leak`)
 - [x] Domínio dos operadores fundamentais do Java
 - [x] Resolução de desafios práticos com regras de negócio simuladas
-- [ ] Estruturas de repetição (`while`, `for`, `do-while`)
-- [ ] Programação Orientada a Objetos (POO)
+- [x] Estruturas de repetição (`while`, `for`, `do-while`)
+- [x] Programação Orientada a Objetos (Abstração, Encapsulamento, Herança, Polimorfismo, Interfaces e Lambdas)
+- [x] Desafio Final: Padrões de Projeto (Design Patterns GoF) na Prática
 - [ ] Integrações com IA e Spring Boot
 
 ---
@@ -81,11 +82,39 @@ src/main/java/
 ├── exercicio6/
 │   ├── ContaCorrente.java # Classe de Modelo POO (Abstração, Encapsulamento, Cheque Especial)
 │   └── Exercicio6.java    # Aplicação Executável com Menu Interativo do Itaú
-└── exercicio7/
-    ├── ContaBancaria.java # Superclasse Mãe (Herança, Protected)
-    ├── ContaCorrente.java # Subclasse com Polimorfismo (@Override sacar com taxa e cheque)
-    ├── ContaPoupanca.java # Subclasse com Polimorfismo e Rendimento de Juros
-    └── Exercicio7.java    # Executável de Demonstração de Polimorfismo
+├── exercicio7/
+│   ├── ContaBancaria.java # Superclasse Mãe (Herança, Protected)
+│   ├── ContaCorrente.java # Subclasse com Polimorfismo (@Override sacar com taxa e cheque)
+│   ├── ContaPoupanca.java # Subclasse com Polimorfismo e Rendimento de Juros
+│   └── Exercicio7.java    # Executável de Demonstração de Polimorfismo
+├── exercicio8/
+│   ├── Tributavel.java             # Interface de Contrato Tradicional
+│   ├── ContaInvestimento.java      # Implementação 1 da Interface Tributavel
+│   ├── SeguroDeVida.java           # Implementação 2 da Interface Tributavel
+│   ├── CalculadoraDeTributos.java  # Polimorfismo genérico com Interface
+│   ├── ServicoNotificacao.java     # @FunctionalInterface para Lambdas
+│   └── Exercicio8.java             # Executável com Expressões Lambda (SMS, App, WhatsApp)
+├── desafio/
+│   └── Main.java                   # Desafio de Código ByteBank (POO e Exceções)
+└── padroesprojeto/                 # 🏆 Desafio de Projeto: Design Patterns (GoF)
+    ├── AppPadroesProjeto.java      # Executável demonstrando todos os padrões integrados
+    ├── model/
+    │   └── ContaDigital.java
+    ├── singleton/
+    │   ├── ConfiguracaoBancoSingleton.java
+    │   └── LogAuditoriaSingleton.java
+    ├── strategy/
+    │   ├── EstrategiaTransferencia.java
+    │   ├── TransferenciaPix.java
+    │   ├── TransferenciaTed.java
+    │   └── TransferenciaDoc.java
+    ├── chain/
+    │   ├── ValidadorTransacao.java
+    │   ├── ValidadorValorPositivo.java
+    │   ├── ValidadorSaldoDisponivel.java
+    │   └── ValidadorAntifraude.java
+    └── facade/
+        └── ItauBancoFacade.java
 ```
 
 ### [Exercício 1: Calculadora de Média Escolar](src/main/java/exercicio1/Exercicio1.java)
@@ -135,6 +164,36 @@ src/main/java/
   - Subclasse `ContaPoupanca` com cálculo e aplicação de rendimento de juros.
   - Demonstração prática de polimorfismo no método `sacar`.
 
+### [Exercício 8: Interfaces e Expressões Lambda no Itaú](src/main/java/exercicio8/Exercicio8.java)
+- **Foco**: **Interfaces** (contratos de desacoplamento) e **Expressões Lambda** (`->`).
+- **Destaque**:
+  - Criação da interface `Tributavel` implementada por classes distintas (`ContaInvestimento` e `SeguroDeVida`), processadas por uma `CalculadoraDeTributos` agnóstica.
+  - Uso de `@FunctionalInterface` com `ServicoNotificacao` para envio de mensagens.
+  - Implementação de canais de notificação (SMS, Push Notification App Itaú, WhatsApp) em linha única com sintaxe de Lambdas (`(msg, dest) -> ...`).
+  - Passagem de Lambdas como argumento de métodos ("on-the-fly").
+
+---
+
+## 🏆 Desafio de Projeto Final: Padrões de Projeto (Design Patterns GoF)
+
+Projeto prático em **Java 21 Puro** aplicando 4 padrões clássicos do catálogo **Gang of Four (GoF)** de forma integrada em um motor de transferências bancárias do **Itaú**:
+
+```mermaid
+flowchart LR
+    Cliente["AppPadroesProjeto"] --> Facade["ItauBancoFacade (Facade)"]
+    Facade --> Strategy["EstrategiaTransferencia (Strategy)<br/>PIX / TED / DOC"]
+    Facade --> Chain["ValidadorTransacao (Chain of Responsibility)<br/>Valor > Saldo > Antifraude"]
+    Facade --> Config["ConfiguracaoBancoSingleton (Singleton)"]
+    Facade --> Log["LogAuditoriaSingleton (Singleton)"]
+```
+
+| Categoria | Padrão GoF | Classes Implementadas | Responsabilidade |
+| :--- | :--- | :--- | :--- |
+| **Criacional** | **Singleton** (Lazy Holder) | `ConfiguracaoBancoSingleton`, `LogAuditoriaSingleton` | Garantir instância única e *thread-safe* para configurações globais do banco (limite antifraude) e log centralizado de auditoria. |
+| **Comportamental** | **Strategy** | `EstrategiaTransferencia`, `TransferenciaPix`, `TransferenciaTed`, `TransferenciaDoc` | Encapsular regras de cálculo de tarifas intercambiáveis em tempo de execução sem `if/else` acoplados. |
+| **Comportamental** | **Chain of Responsibility** | `ValidadorTransacao`, `ValidadorValorPositivo`, `ValidadorSaldoDisponivel`, `ValidadorAntifraude` | Processar validações de segurança e saldo em cadeia desacoplada antes de efetivar a movimentação. |
+| **Estrutural** | **Facade** | `ItauBancoFacade` | Expor uma interface única e limpa (`realizarTransferencia`), escondendo toda a orquestração dos subsistemas acima. |
+
 ---
 
 ## 💡 Aprendizados e Boas Práticas Anotadas
@@ -173,6 +232,13 @@ java -cp target/classes exercicio6.Exercicio6
 
 # Executar Exercício 7
 java -cp target/classes exercicio7.Exercicio7
+
+# Executar Exercício 8
+java -cp target/classes exercicio8.Exercicio8
+
+# Executar Desafio Final - Padrões de Projeto (GoF)
+javac -encoding UTF-8 -d target/classes (Get-ChildItem -Path src\main\java\padroesprojeto -Recurse -Filter *.java).FullName
+java -cp target/classes padroesprojeto.AppPadroesProjeto
 ```
 
 ---
