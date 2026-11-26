@@ -61,15 +61,14 @@ public class Exercicio5 {
             saldoAtual += rendimento;
             System.out.printf("Mês %02d | Rendimento: R$ %.2f | Saldo Acumulado: R$ %.2f%n", mes, rendimento,
                     saldoAtual);
+        }
 
-            
-            double lucro = saldoAtual - valorInicial;
-            System.out.println("\n=== RESUMO DO INVESTIMENTO ===");
-            System.out.printf("Valor Inicial: R$ %.2f%n", valorInicial);
-            System.out.printf("Lucro Total:   R$ %.2f%n", lucro);
-            System.out.printf("Saldo Final:   R$ %.2f%n", saldoAtual);
+        double lucro = saldoAtual - valorInicial;
+        System.out.println("\n=== RESUMO DO INVESTIMENTO ===");
+        System.out.printf("Valor Inicial: R$ %.2f%n", valorInicial);
+        System.out.printf("Lucro Total:   R$ %.2f%n", lucro);
+        System.out.printf("Saldo Final:   R$ %.2f%n", saldoAtual);
 
-            
-         
+        scanner.close();
     }
 }
