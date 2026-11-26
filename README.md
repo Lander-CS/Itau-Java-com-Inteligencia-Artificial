@@ -74,8 +74,18 @@ src/main/java/
 │   └── Exercicio2.java    # Sistema Bancário de Aprovação de Empréstimo (Itaú)
 ├── exercicio3/
 │   └── Exercicio3.java    # Verificador Par/Ímpar, Módulo e Acumulador de Pontos
-└── exercicio4/
-    └── Exercicio4.java    # Terminal de Autoatendimento Itaú (Switch Case & Do-While)
+├── exercicio4/
+│   └── Exercicio4.java    # Terminal de Autoatendimento Itaú (Switch Case & Do-While)
+├── exercicio5/
+│   └── Exercicio5.java    # Simulador de Investimentos CDB Itaú (Laço FOR e Juros Compostos)
+├── exercicio6/
+│   ├── ContaCorrente.java # Classe de Modelo POO (Abstração, Encapsulamento, Cheque Especial)
+│   └── Exercicio6.java    # Aplicação Executável com Menu Interativo do Itaú
+└── exercicio7/
+    ├── ContaBancaria.java # Superclasse Mãe (Herança, Protected)
+    ├── ContaCorrente.java # Subclasse com Polimorfismo (@Override sacar com taxa e cheque)
+    ├── ContaPoupanca.java # Subclasse com Polimorfismo e Rendimento de Juros
+    └── Exercicio7.java    # Executável de Demonstração de Polimorfismo
 ```
 
 ### [Exercício 1: Calculadora de Média Escolar](src/main/java/exercicio1/Exercicio1.java)
@@ -103,6 +113,27 @@ src/main/java/
   - Implementação de laço `do-while` para manter o menu ativo até a opção de saída (`4`).
   - Domínio de escopo de variáveis no Java (`opcao` declarada fora do loop).
   - Operações de saldo com validação de saque e operadores de atribuição composta (`+=`, `-=`).
+
+### [Exercício 5: Simulador de Investimentos CDB Itaú](src/main/java/exercicio5/Exercicio5.java)
+- **Foco**: Repetição controlada com laço `for (int mes = 1; mes <= meses; mes++)` simulando juros compostos.
+- **Destaque**:
+  - Separação clara entre a variável contadora do laço (`mes`) e o cálculo financeiro (`rendimento`).
+  - Formatação monetária com `printf` utilizando `%02d` para dígitos de meses e `%.2f` para valores decimais.
+  - Exibição de resumo final de lucro e saldo fora do laço de repetição.
+
+### [Exercício 6: Modelagem de Conta Corrente e Menu Interativo](src/main/java/exercicio6/Exercicio6.java)
+- **Foco**: Fundamentos de Programação Orientada a Objetos (POO): **Abstração** e **Encapsulamento**.
+- **Destaque**:
+  - Criação da classe de modelo `ContaCorrente` com atributos `private`, construtor e métodos com validação de regras de negócio (`depositar`, `sacar` com cheque especial, `exibirExtrato`).
+  - Criação de menu de autoatendimento no terminal integrando o objeto instanciado via `new` ao laço `do-while` e `switch`.
+
+### [Exercício 7: Herança e Polimorfismo Bancário](src/main/java/exercicio7/Exercicio7.java)
+- **Foco**: Pilares de **Herança** (`extends`, `super`, `protected`) e **Polimorfismo** (`@Override`).
+- **Destaque**:
+  - Superclasse `ContaBancaria` centralizando atributos e comportamentos comuns a todas as contas.
+  - Subclasse `ContaCorrente` sobrescrevendo `sacar` com taxa operacional de R$ 2,50 e cheque especial.
+  - Subclasse `ContaPoupanca` com cálculo e aplicação de rendimento de juros.
+  - Demonstração prática de polimorfismo no método `sacar`.
 
 ---
 
@@ -133,6 +164,15 @@ java src/main/java/exercicio3/Exercicio3.java
 
 # Executar Exercício 4
 java src/main/java/exercicio4/Exercicio4.java
+
+# Executar Exercício 5
+java src/main/java/exercicio5/Exercicio5.java
+
+# Executar Exercício 6
+java -cp target/classes exercicio6.Exercicio6
+
+# Executar Exercício 7
+java -cp target/classes exercicio7.Exercicio7
 ```
 
 ---
